@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paysusofi</title>
+
+    <link
+      rel="stylesheet"
+      href="../use.fontawesome.com/releases/v5.4.2/css/all.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- <link rel="stylesheet" type="text/css" href="assets/styles.css?v=16"> -->
+    <link
+      rel="shortcut icon"
+      href="assets/frontend/assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <script src="https://cdn.tailwindcss.com/"></script>
+
+    <meta
+      name="csrf-token"
+      content="kfxVKI3rPjN94HxzfnXcIgAF3qXNJlw4P8VNS4b5"
+    />
+    <style type="text/tailwindcss">
+      @layer utilities {
+        @font-face {
+          font-family: Briston;
+          src: url("assets/frontend/assets/font/Briston_Regular.ttf");
+        }
+
+        html,
+        body {
+          @apply scroll-smooth font-['Inter'];
+        }
+
+        .title {
+          @apply font-['Briston'] text-[42px] sm:text-[52px] md:text-[60px];
+        }
+
+        .subtitle {
+          @apply text-[18px] font-[800];
+        }
+
+        .faq-button-style {
+          @apply min-w-[40px] min-h-[40px] rounded-full text-dark bg-white border border-gray-300 flex items-center justify-center;
+        }
+
+        [x-cloak] {
+          display: none !important;
+        }
+
+        .container {
+          @apply p-5 lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto;
+        }
+
+        .modal-wrapper {
+          @apply overflow-hidden z-[500] overflow-y-auto fixed top-0 h-screen w-full left-0 bg-black bg-opacity-70;
+        }
+
+        .modal-inner-wrapper {
+          @apply flex flex-col items-center sticky top-0 z-[200] justify-center min-h-[100vh] w-full p-5;
+        }
+
+        .modal-body {
+          @apply rounded-xl bg-white p-3 relative z-[300];
+        }
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#212121",
+              black: "#000",
+              light: "#FAFAFA",
+              "light-orange": "#FEF0E6",
+              primary: "#F66B03",
+              "deep-primary": "#C35618",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body x-data>
+    <div
+      class="modal-wrapper z-[400]"
+      x-data="{ isModalOpen: false, wasClicked: false }"
+      @trigger-open-modal.window="isModalOpen = !isModalOpen; wasClicked = true"
+      @trigger-close-modal.window="isModalOpen = false"
+      x-show="isModalOpen"
+      x-transition
+      x-cloak
+    >
+      <section class="modal-inner-wrapper">
+        <section
+          class="modal-body rounded-lg shadow md:w-[60%] px-5 bg-white"
+          @click.outside="isModalOpen = wasClicked; wasClicked = false"
+        >
+          <div class="flex justify-end">
+            <button
+              class="w-[30px] h-[30px] rounded-full bg-gray-200"
+              x-on:click="isModalOpen = false"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <section class="grid lg:grid-cols-3 gap-5 p-7">
+            <section
+              class="lg:col-span-2 order-2 lg:order-1 flex flex-col justify-center items-start space-y-5"
+            >
+              <h1
+                class="font-['Briston'] text-[32px] md:text-[42px] leading-none"
+              >
+                Download the PAYSUSOFI app and
+                <span class="text-primary">enjoy effortless</span> bill
+                management.
+              </h1>
+
+              <div class="flex items-center space-x-5">
+                <a
+                  href="https://play.google.com/store/apps/details?id=co.PAYSUSOFI.app&amp;pcampaignid=web_share"
+                >
+                  <img
+                    src="assets/frontend/assets/images/google_play.png"
+                    alt=""
+                    class="h-[50px] w-auto"
+                  />
+                </a>
+                <a href="apple.html">
+                  <img
+                    src="assets/frontend/assets/images/apple_store.png"
+                    alt="Apple Store"
+                    class="relative z-20"
+                  />
+                </a>
+              </div>
+            </section>
+            <section
+              class="order-1 lg:order-2 flex space-x-5 items-end justify-center"
+            >
+              <img
+                src="assets/frontend/assets/images/scan.jpg"
+                alt=""
+                class="max-w-[150px] h-auto"
+              />
+            </section>
+          </section>
+        </section>
+      </section>
+    </div>
+    <section
+      class="bg-primary py-5"
+      style="
+        background-image: url('assets/frontend/assets/svgs/illustration1.svg');
+      "
+    >
+      <section x-data="{ showDrawer : false }">
+        <section
+          class="bg-black fixed top-0 left-0 w-full h-full bg-opacity-60 z-[1000]"
+          x-show="showDrawer"
+          x-transition
+          x-cloak
+        >
+          <div
+            class="flex flex-col items-start bg-white rounded-r-[100px] h-full w-3/4 p-5"
+            x-on:click.away="showDrawer = false"
+          >
+            <ul class="space-y-5 flex-1 space-x-8">
+              <li>
+                <a href="#">Home</a>
+              </li>
+
+              <li>
+                <a href="about-us.html">About</a>
+              </li>
+
+              <li>
+                <a href="faq.html">FAQ</a>
+              </li>
+
+              <li>
+                <a href="contact.html">Contact Us</a>
+              </li>
+
+              <li>
+                <a href="terms.html">Terms</a>
+              </li>
+            </ul>
+            <button
+              x-on:click="$dispatch('trigger-open-modal')"
+              class="bg-white rounded-full px-5 text-xs md:text-base sm:px-10 py-3 border border-primary flex items-center space-x-3"
+            >
+              <span>Download app</span>
+              <img
+                src="assets/frontend/assets/svgs/arrow-right.svg"
+                alt=""
+                class="hidden md:inline"
+              />
+            </button>
+          </div>
+        </section>
+        <header
+          class="flex items-center justify-between bg-white mx-3 md:mx-8 rounded-full px-3 md:px-8"
+        >
+          <button
+            class="px-3 p-2 inline-block lg:hidden"
+            x-on:click="showDrawer = !showDrawer"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <a href="#">
+            <img src="assets/frontend/assets/images/logo.png" alt="" />
+          </a>
+
+          <ul class="hidden lg:flex items-center space-x-8">
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+
+            <li>
+              <a href="about-us.html">About</a>
+            </li>
+
+            <li>
+              <a href="faq.html">FAQ</a>
+            </li>
+            <li>
+              <a href="contact.html">Contact Us</a>
+            </li>
+            <li>
+              <a href="terms.html">Terms</a>
+            </li>
+          </ul>
+
+          <button
+            x-on:click="$dispatch('trigger-open-modal')"
+            class="bg-white rounded-full px-5 text-xs md:text-base sm:px-10 py-3 border border-primary flex items-center space-x-3"
+          >
+            <span>Download app</span>
+            <img
+              src="assets/frontend/assets/svgs/arrow-right.svg"
+              alt=""
+              class="hidden md:inline"
+            />
+          </button>
+        </header>
+      </section>
+      <div
+        class="container flex flex-col justify-center items-center space-y-5 text-white min-h-[50vh] text-center"
+      >
+        <header class="relative">
+          <h1 class="title leading-none">Terms of Service</h1>
+          <img src="assets/frontend/assets/svgs/stroke.svg" alt="" />
+        </header>
+        <div class="space-y-5">
+          <p>Update: 21-March, 2023</p>
+        </div>
+      </div>
+    </section>
+    <section class="my-16">
+      <section class="container space-y-5">
+        <p>
+          Welcome to PAYSUSOFI, an online payment platform that allows you to
+          pay your bills easily and securely. Please read these Terms of Service
+          carefully before using the PAYSUSOFI service. By using the PAYSUSOFI
+          service, you agree to be bound by these Terms of Service, as well as
+          any additional terms and conditions that may apply to specific
+          features or services offered by PAYSUSOFI. If you do not agree to
+          these Terms of Service, you may not use the PAYSUSOFI service.
+        </p>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Description of Service</h1>
+          <p>
+            PAYSUSOFI is an online payment platform that allows you to make
+            payments for various bills and services, including electricity
+            bills, education bills, airtime top-ups, cable TV subscriptions,
+            data bundle top-ups, and internet bills. By using the PAYSUSOFI
+            service, you can easily and securely make payments from your
+            computer or mobile device.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Your Account</h1>
+          <p>
+            To use the PAYSUSOFI service, you must create an account and provide
+            us with accurate and complete information about yourself. You are
+            responsible for maintaining the confidentiality of your account and
+            password, and for all activities that occur under your account. You
+            must immediately notify PAYSUSOFI of any unauthorized use of your
+            account or any other breach of security.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Payments</h1>
+          <p>
+            PAYSUSOFI allows you to make payments for various bills and services
+            offered by third-party providers. By using the PAYSUSOFI service to
+            make payments, you agree to be bound by the terms and conditions of
+            the third-party providers, as well as these Terms of Service.
+          </p>
+
+          <p>
+            When you make a payment through PAYSUSOFI, you authorize us to
+            charge your account for the amount of the payment, plus any
+            applicable fees. You are responsible for ensuring that you have
+            sufficient funds in your account to cover the payment.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Fees</h1>
+          <p>
+            PAYSUSOFI may charge fees for certain services or transactions, such
+            as processing fees or convenience fees. Any fees will be clearly
+            disclosed to you before you complete a transaction.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Prohibited Activities</h1>
+          <p>
+            You agree not to use the PAYSUSOFI service for any illegal or
+            unauthorized purpose, including but not limited to fraud, money
+            laundering, or terrorist financing. You also agree not to use the
+            PAYSUSOFI service to harass, defame, or threaten any person or
+            entity, or to upload, post, or transmit any content that is
+            unlawful, harmful, or objectionable.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Termination</h1>
+          <p>
+            PAYSUSOFI reserves the right to terminate your account or restrict
+            your access to the PAYSUSOFI service at any time, for any reason,
+            without notice. You may also terminate your account at any time by
+            contacting PAYSUSOFI customer support.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">Intellectual Property</h1>
+          <p>
+            The PAYSUSOFI service and all content and materials available
+            through the service, including but not limited to text, graphics,
+            logos, images, and software, are the property of PAYSUSOFI or its
+            licensors and are protected by copyright, trademark, and other
+            intellectual property laws. You may not use any of these materials
+            without the express written consent of PAYSUSOFI.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">
+            Disclaimer of Warranties
+          </h1>
+          <p>
+            The PAYSUSOFI service is provided on an "as is" and "as available"
+            basis, without warranty of any kind, express or implied. PAYSUSOFI
+            does not warrant that the service will be uninterrupted or
+            error-free, or that the service will meet your requirements or
+            expectations.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h1 class="text-primary font-bold text-xl">
+            Limitation of Liability
+          </h1>
+          <p>In no event shall PAYSUSOFI be</p>
+        </section>
+      </section>
+    </section>
+
+    <section class="bg-light-orange">
+      <section class="container">
+        <section class="grid lg:grid-cols-2 gap-10">
+          <section
+            class="order-2 lg:order-1 flex flex-col justify-center items-start space-y-5"
+          >
+            <h1 class="title leading-none">
+              Try PAYSUSOFI for free on iOS and Android
+            </h1>
+
+            <div class="flex items-center space-x-5 md:space-x-10">
+              <a
+                href="https://play.google.com/store/apps/details?id=co.PAYSUSOFI.app&amp;pcampaignid=web_share"
+              >
+                <img
+                  src="assets/frontend/assets/images/google_play.png"
+                  alt=""
+                  class="h-[50px] w-auto"
+              /></a>
+              <a href="apple.html">
+                <img
+                  src="assets/frontend/assets/images/apple_store.png"
+                  alt=""
+                  class="h-[50px] w-auto"
+                />
+              </a>
+            </div>
+          </section>
+          <section
+            class="order-1 lg:order-2 flex space-x-5 items-end justify-center"
+          >
+            <img
+              src="assets/frontend/assets/images/mobile_app2.png"
+              alt=""
+              class="max-w-[350px] h-auto relative lg:top-[100px] z-0"
+            />
+            <img
+              src="assets/frontend/assets/images/scan.jpg"
+              alt=""
+              class="max-w-[150px] h-auto hidden md:block"
+            />
+          </section>
+        </section>
+      </section>
+    </section>
+
+    <footer class="bg-light-orange relative z-20">
+      <section class="container rounded-t-[100px] bg-dark text-white">
+        <section
+          class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 sm:p-10"
+        >
+          <div
+            class="flex flex-col sm:flex-row text-center sm:text-left items-center sm:items-start justify-start sm:space-x-5 sm:col-span-2"
+          >
+            <img src="assets/frontend/assets/images/logo.png" alt="" />
+            <div class="text-sm">
+              <p>
+                PAYSUSOFI is a leading payment service provider that enables
+                users to easily and securely pay for various bills and
+                subscriptions, including electricity, internet, airtime, data
+                bundles, education bills, cable TV, and more.
+              </p>
+              <p><strong>Address:</strong> 38 Aminu kano cres Abuja, Nigeria</p>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Services</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li>
+                <a href="#">Data bundle purchases</a>
+              </li>
+              <li>
+                <a href="#">Mobile airtime top-ups</a>
+              </li>
+              <li>
+                <a href="#">Education bill payments</a>
+              </li>
+              <li>
+                <a href="#">Betting services</a>
+              </li>
+              <li>
+                <a href="#">Cable TV subscriptions</a>
+              </li>
+              <li>
+                <a href="#">Utility Payment</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Company</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#">Terms of Use</a>
+              </li>
+              <li>
+                <a href="#">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Info</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li>
+                <a href="tel:(+234) 907 599 2464" class="font-bold"
+                  >(+234) 907 599 2464</a
+                >
+              </li>
+              <li>
+                <a
+                  href="cdn-cgi/l/email-protection.html#f1b39d9e839596839e8481b19e84859d9e9e9adf929e9c"
+                  ><span
+                    class="__cf_email__"
+                    data-cfemail="3577595a475152475a4045755a4041595a5a5e1b565a58"
+                    >[email&#160;protected]</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Follow us</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li class="space-x-3">
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/twitter.svg"
+                    alt=""
+                    class="scale-75"
+                  /><span>Twitter</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/facebook.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>Facebook</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/instagram.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>Instagram</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/linkedin.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>LinkedIn</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/whatsapp.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>Whatsapp</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section
+          class="py-5 flex flex-col justify-center space-y-3 sm:space-y-0 items-center sm:flex-row sm:justify-between text-xs border-t border-gray-500"
+        >
+          <div class="text-gray-400">© 2023 PAYSUSOFI All rights reserved.</div>
+          <ul class="flex items-center space-x-5">
+            <li>
+              <a href="#">Privacy policy</a>
+            </li>
+            <li>
+              <a href="#">Terms of use</a>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </footer>
+
+    <script
+      data-cfasync="false"
+      src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script defer src="../unpkg.com/alpinejs%403.9.0/dist/cdn.min.js"></script>
+  </body>
+
+  <!-- Mirrored from PAYSUSOFI.co/terms by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 01:46:56 GMT -->
+</html>

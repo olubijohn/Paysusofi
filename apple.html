@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>App Stores</title>
+
+    <link
+      rel="stylesheet"
+      href="../use.fontawesome.com/releases/v5.4.2/css/all.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- <link rel="stylesheet" type="text/css" href="assets/styles.css?v=16"> -->
+    <link
+      rel="shortcut icon"
+      href="assets/frontend/assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <script src="https://cdn.tailwindcss.com/"></script>
+
+    <meta
+      name="csrf-token"
+      content="kfxVKI3rPjN94HxzfnXcIgAF3qXNJlw4P8VNS4b5"
+    />
+    <style type="text/tailwindcss">
+      @layer utilities {
+        @font-face {
+          font-family: Briston;
+          src: url("assets/frontend/assets/font/Briston_Regular.ttf");
+        }
+
+        html,
+        body {
+          @apply scroll-smooth font-['Inter'];
+        }
+
+        .title {
+          @apply font-['Briston'] text-[42px] sm:text-[52px] md:text-[60px];
+        }
+
+        .subtitle {
+          @apply text-[18px] font-[800];
+        }
+
+        .faq-button-style {
+          @apply min-w-[40px] min-h-[40px] rounded-full text-dark bg-white border border-gray-300 flex items-center justify-center;
+        }
+
+        [x-cloak] {
+          display: none !important;
+        }
+
+        .container {
+          @apply p-5 lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto;
+        }
+
+        .modal-wrapper {
+          @apply overflow-hidden z-[500] overflow-y-auto fixed top-0 h-screen w-full left-0 bg-black bg-opacity-70;
+        }
+
+        .modal-inner-wrapper {
+          @apply flex flex-col items-center sticky top-0 z-[200] justify-center min-h-[100vh] w-full p-5;
+        }
+
+        .modal-body {
+          @apply rounded-xl bg-white p-3 relative z-[300];
+        }
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#212121",
+              black: "#000",
+              light: "#FAFAFA",
+              "light-orange": "#FEF0E6",
+              primary: "#F66B03",
+              "deep-primary": "#C35618",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body x-data class="bg-light">
+    <section
+      class="bg-primary py-5 relative"
+      style="
+        background-image: url('assets/frontend/assets/svgs/illustration1.svg');
+      "
+    >
+      <section class="h-56 relative max-w-4xl mx-auto">
+        <div
+          class="bg-white w-20 h-20 lg:h-32 lg:w-32 p-3 absolute -bottom-10 lg:-bottom-20 shadow-lg rounded-md left-2 lg:left-0"
+        >
+          <img
+            src="../i.ibb.co/Tq66P5F/PAYSUSOFI-2-0-app-icon.png"
+            class="h-full object-cover w-full"
+            loading="lazy"
+            alt="logo"
+          />
+        </div>
+      </section>
+    </section>
+
+    <section class="font-medium mx-auto px-2 lg:px-0 max-w-4xl">
+      <h1 class="lg:mt-20 mt-12 text-2xl lg:text-5xl">
+        Installing PAYSUSOFI on your iPhone
+      </h1>
+      <p class="mt-6">
+        Follow these steps below to install our mobile app on your iPhone
+      </p>
+      <ol class="list-decimal pl-6 mt-8">
+        <li class="mb-2">
+          Click this link to download
+          <a
+            href="https://apps.apple.com/ng/app/testflight/id899247664"
+            target="_blank"
+            class="text-blue-500 hover:underline"
+          >
+            TestFlight
+          </a>
+          on your iPhone.
+        </li>
+        <li class="mb-2">
+          Click this link to download the
+          <a
+            href="https://testflight.apple.com/join/rSkmxsvz"
+            target="_blank"
+            class="text-blue-500 hover:underline"
+          >
+            PAYSUSOFI App
+          </a>
+          after downloading TestFlight.
+        </li>
+        <p class="mb-3">
+          Note: You can't download the PAYSUSOFI app unless you have TestFlight
+          installed.
+        </p>
+        <img
+          src="../i.ibb.co/PhvGt3Z/step-one-step-two-two.jpg"
+          class="h-full object-cover w-72 shadow-lg"
+          loading="lazy"
+          alt="first_step"
+        />
+        <li class="my-2">
+          Click on the "Install" the app, then click on "Open"
+        </li>
+        <div class="flex flex-col md:flex-row gap-12 mt-4">
+          <img
+            src="../i.ibb.co/Srd4PBW/app-info.jpg"
+            class="h-full object-cover w-64 shadow-lg"
+            loading="lazy"
+            alt="second_step"
+          />
+          <img
+            src="../i.ibb.co/WBR6hJX/open-two.jpg"
+            class="h-full object-cover w-64 shadow-lg"
+            loading="lazy"
+            alt="third_step"
+          />
+        </div>
+        <li class="my-2">
+          Read and accept Apple terms and conditions for Testflight, Share
+          Feedback
+        </li>
+        <div class="flex flex-col md:flex-row gap-12 mt-4">
+          <img
+            src="../i.ibb.co/WDJXcvm/share-feedback-two.png"
+            class="h-full object-cover w-72 shadow-lg"
+            loading="lazy"
+            alt="third_step"
+          />
+        </div>
+        <p class="text-center my-4">The PAYSUSOFI Team</p>
+      </ol>
+    </section>
+
+    <script defer src="../unpkg.com/alpinejs%403.9.0/dist/cdn.min.js"></script>
+  </body>
+
+  <!-- Mirrored from PAYSUSOFI.co/apple by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 01:46:47 GMT -->
+</html>

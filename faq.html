@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paysusofi</title>
+
+    <link
+      rel="stylesheet"
+      href="../use.fontawesome.com/releases/v5.4.2/css/all.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- <link rel="stylesheet" type="text/css" href="assets/styles.css?v=16"> -->
+    <link
+      rel="shortcut icon"
+      href="assets/frontend/assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <script src="https://cdn.tailwindcss.com/"></script>
+
+    <meta
+      name="csrf-token"
+      content="kfxVKI3rPjN94HxzfnXcIgAF3qXNJlw4P8VNS4b5"
+    />
+    <style type="text/tailwindcss">
+      @layer utilities {
+        @font-face {
+          font-family: Briston;
+          src: url("assets/frontend/assets/font/Briston_Regular.ttf");
+        }
+
+        html,
+        body {
+          @apply scroll-smooth font-['Inter'];
+        }
+
+        .title {
+          @apply font-['Briston'] text-[42px] sm:text-[52px] md:text-[60px];
+        }
+
+        .subtitle {
+          @apply text-[18px] font-[800];
+        }
+
+        .faq-button-style {
+          @apply min-w-[40px] min-h-[40px] rounded-full text-dark bg-white border border-gray-300 flex items-center justify-center;
+        }
+
+        [x-cloak] {
+          display: none !important;
+        }
+
+        .container {
+          @apply p-5 lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto;
+        }
+
+        .modal-wrapper {
+          @apply overflow-hidden z-[500] overflow-y-auto fixed top-0 h-screen w-full left-0 bg-black bg-opacity-70;
+        }
+
+        .modal-inner-wrapper {
+          @apply flex flex-col items-center sticky top-0 z-[200] justify-center min-h-[100vh] w-full p-5;
+        }
+
+        .modal-body {
+          @apply rounded-xl bg-white p-3 relative z-[300];
+        }
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#212121",
+              black: "#000",
+              light: "#FAFAFA",
+              "light-orange": "#FEF0E6",
+              primary: "#F66B03",
+              "deep-primary": "#C35618",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body x-data>
+    <div
+      class="modal-wrapper z-[400]"
+      x-data="{ isModalOpen: false, wasClicked: false }"
+      @trigger-open-modal.window="isModalOpen = !isModalOpen; wasClicked = true"
+      @trigger-close-modal.window="isModalOpen = false"
+      x-show="isModalOpen"
+      x-transition
+      x-cloak
+    >
+      <section class="modal-inner-wrapper">
+        <section
+          class="modal-body rounded-lg shadow md:w-[60%] px-5 bg-white"
+          @click.outside="isModalOpen = wasClicked; wasClicked = false"
+        >
+          <div class="flex justify-end">
+            <button
+              class="w-[30px] h-[30px] rounded-full bg-gray-200"
+              x-on:click="isModalOpen = false"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <section class="grid lg:grid-cols-3 gap-5 p-7">
+            <section
+              class="lg:col-span-2 order-2 lg:order-1 flex flex-col justify-center items-start space-y-5"
+            >
+              <h1
+                class="font-['Briston'] text-[32px] md:text-[42px] leading-none"
+              >
+                Download the PAYSUSOFI app and
+                <span class="text-primary">enjoy effortless</span> bill
+                management.
+              </h1>
+
+              <div class="flex items-center space-x-5">
+                <a
+                  href="https://play.google.com/store/apps/details?id=co.PAYSUSOFI.app&amp;pcampaignid=web_share"
+                >
+                  <img
+                    src="assets/frontend/assets/images/google_play.png"
+                    alt=""
+                    class="h-[50px] w-auto"
+                  />
+                </a>
+                <a href="apple.html">
+                  <img
+                    src="assets/frontend/assets/images/apple_store.png"
+                    alt="Apple Store"
+                    class="relative z-20"
+                  />
+                </a>
+              </div>
+            </section>
+            <section
+              class="order-1 lg:order-2 flex space-x-5 items-end justify-center"
+            >
+              <img
+                src="assets/frontend/assets/images/scan.jpg"
+                alt=""
+                class="max-w-[150px] h-auto"
+              />
+            </section>
+          </section>
+        </section>
+      </section>
+    </div>
+    <section
+      class="bg-primary py-5"
+      style="
+        background-image: url('assets/frontend/assets/svgs/illustration1.svg');
+      "
+    >
+      <section x-data="{ showDrawer: false }">
+        <section
+          class="bg-black fixed top-0 left-0 w-full h-full bg-opacity-60 z-[1000]"
+          x-show="showDrawer"
+          x-transition
+          x-cloak
+        >
+          <div
+            class="flex flex-col items-start bg-white rounded-r-[100px] h-full w-3/4 p-5"
+            x-on:click.away="showDrawer = false"
+          >
+            <ul class="space-y-5 flex-1 space-x-8">
+              <li>
+                <a href="#">Home</a>
+              </li>
+
+              <li>
+                <a href="about-us.html">About</a>
+              </li>
+
+              <li>
+                <a href="faq.html">FAQ</a>
+              </li>
+
+              <li>
+                <a href="contact.html">Contact Us</a>
+              </li>
+
+              <li>
+                <a href="terms.html">Terms</a>
+              </li>
+            </ul>
+            <button
+              x-on:click="$dispatch('trigger-open-modal')"
+              class="bg-white rounded-full px-5 text-xs md:text-base sm:px-10 py-3 border border-primary flex items-center space-x-3"
+            >
+              <span>Download app</span>
+              <img
+                src="assets/frontend/assets/svgs/arrow-right.svg"
+                alt=""
+                class="hidden md:inline"
+              />
+            </button>
+          </div>
+        </section>
+        <header
+          class="flex items-center justify-between bg-white mx-3 md:mx-8 rounded-full px-3 md:px-8"
+        >
+          <button
+            class="px-3 p-2 inline-block lg:hidden"
+            x-on:click="showDrawer = !showDrawer"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <a href="#">
+            <img src="assets/frontend/assets/images/logo.png" alt="" />
+          </a>
+
+          <ul class="hidden lg:flex items-center space-x-8">
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+
+            <li>
+              <a href="about-us.html">About</a>
+            </li>
+
+            <li>
+              <a href="faq.html">FAQ</a>
+            </li>
+            <li>
+              <a href="contact.html">Contact Us</a>
+            </li>
+            <li>
+              <a href="terms.html">Terms</a>
+            </li>
+          </ul>
+
+          <button
+            x-on:click="$dispatch('trigger-open-modal')"
+            class="bg-white rounded-full px-5 text-xs md:text-base sm:px-10 py-3 border border-primary flex items-center space-x-3"
+          >
+            <span>Download app</span>
+            <img
+              src="assets/frontend/assets/svgs/arrow-right.svg"
+              alt=""
+              class="hidden md:inline"
+            />
+          </button>
+        </header>
+      </section>
+      <div
+        class="container flex flex-col justify-center items-center space-y-5 text-white min-h-[60vh] text-center"
+      >
+        <header class="relative">
+          <h1 class="title leading-none">Our FAQs</h1>
+          <img src="assets/frontend/assets/svgs/stroke.svg" alt="" />
+        </header>
+        <div class="space-y-5 flex flex-col items-center">
+          <p>Here you can resolve any doubts that you may have</p>
+
+          <a
+            href="contact.html"
+            class="bg-white rounded-full px-5 sm:px-10 py-3 text-primary flex items-center space-x-3"
+          >
+            <span>Talk with us</span>
+            <img src="assets/frontend/assets/svgs/arrow-right.svg" alt="" />
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="my-16">
+      <section class="container space-y-1">
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Why Should I use Paysusofi
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How Can I Pay For Utility On Paysusofi
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How do I Pay Or depoist on PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              What Happen If my card doesn't work?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              I was debited for a failed transaction
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              What is PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Is PAYSUSOFI safe and secure to use?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How do I add money to my PAYSUSOFI wallet?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How long does it take for a payment to be processed through
+              PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Can I cancel a payment made through PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              What happens if I make a payment to the wrong biller or service
+              provider?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How can I view my payment history on PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Are there any fees associated with using PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How do I add money to my PAYSUSOFI wallet?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Can I set up recurring payments through PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              What happens if my payment is rejected or fails to go through?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How can I contact PAYSUSOFI customer support for assistance?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Can I receive refunds for payments made through PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              What happens if my PAYSUSOFI account is compromised or hacked?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Is there a mobile app for PAYSUSOFI and where can I download it?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How can I update my personal information or payment methods on
+              PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              Are there any rewards or loyalty programs for using PAYSUSOFI?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+
+        <div
+          class="rounded-2xl p-5 space-y-3"
+          x-data="{ show : false}"
+          :class="show ? 'bg-primary text-white' : 'bg-white'"
+          x-on:click.away="show = false"
+        >
+          <header
+            class="flex items-center space-x-3 justify-start cursor-pointer"
+          >
+            <button
+              class="min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+              :class="show ? 'bg-white text-dark' : ''"
+              x-on:click="show = !show"
+            >
+              <i
+                class="fas fa-chevron-down transition"
+                :class="show ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <h2
+              :class="show ? 'font-bold' : 'font-medium'"
+              x-on:click="show = !show"
+            >
+              How does PAYSUSOFI protect my personal and financial information?
+            </h2>
+          </header>
+          <p x-show="show" x-transition>
+            Using Paysusofi is simply the safest and easiest way to pay for
+            Utilities in Nigeria. It is faster than any other payment
+            platform.You can also use USSD to recharge, it's that easy.
+            Paysusofi strives to give you access to constant Cheap Services and
+            also keep your data safe through our military grade safety and
+            security system.
+          </p>
+        </div>
+      </section>
+    </section>
+
+    <section class="bg-light-orange">
+      <section class="container">
+        <section class="grid lg:grid-cols-2 gap-10">
+          <section
+            class="order-2 lg:order-1 flex flex-col justify-center items-start space-y-5"
+          >
+            <h1 class="title leading-none">
+              Try PAYSUSOFI for free on iOS and Android
+            </h1>
+
+            <div class="flex items-center space-x-5 md:space-x-10">
+              <a
+                href="https://play.google.com/store/apps/details?id=co.PAYSUSOFI.app&amp;pcampaignid=web_share"
+              >
+                <img
+                  src="assets/frontend/assets/images/google_play.png"
+                  alt=""
+                  class="h-[50px] w-auto"
+              /></a>
+              <a href="apple.html">
+                <img
+                  src="assets/frontend/assets/images/apple_store.png"
+                  alt=""
+                  class="h-[50px] w-auto"
+                />
+              </a>
+            </div>
+          </section>
+          <section
+            class="order-1 lg:order-2 flex space-x-5 items-end justify-center"
+          >
+            <img
+              src="assets/frontend/assets/images/mobile_app2.png"
+              alt=""
+              class="max-w-[350px] h-auto relative lg:top-[100px] z-0"
+            />
+            <img
+              src="assets/frontend/assets/images/scan.jpg"
+              alt=""
+              class="max-w-[150px] h-auto hidden md:block"
+            />
+          </section>
+        </section>
+      </section>
+    </section>
+
+    <footer class="bg-light-orange relative z-20">
+      <section class="container rounded-t-[100px] bg-dark text-white">
+        <section
+          class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 sm:p-10"
+        >
+          <div
+            class="flex flex-col sm:flex-row text-center sm:text-left items-center sm:items-start justify-start sm:space-x-5 sm:col-span-2"
+          >
+            <img src="assets/frontend/assets/images/logo.png" alt="" />
+            <div class="text-sm">
+              <p>
+                PAYSUSOFI is a leading payment service provider that enables
+                users to easily and securely pay for various bills and
+                subscriptions, including electricity, internet, airtime, data
+                bundles, education bills, cable TV, and more.
+              </p>
+              <p><strong>Address:</strong> 38 Aminu kano cres Abuja, Nigeria</p>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Services</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li>
+                <a href="#">Data bundle purchases</a>
+              </li>
+              <li>
+                <a href="#">Mobile airtime top-ups</a>
+              </li>
+              <li>
+                <a href="#">Education bill payments</a>
+              </li>
+              <li>
+                <a href="#">Betting services</a>
+              </li>
+              <li>
+                <a href="#">Cable TV subscriptions</a>
+              </li>
+              <li>
+                <a href="#">Utility Payment</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Company</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#">Terms of Use</a>
+              </li>
+              <li>
+                <a href="#">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Info</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li>
+                <a href="tel:(+234) 907 599 2464" class="font-bold"
+                  >(+234) 907 599 2464</a
+                >
+              </li>
+              <li>
+                <a
+                  href="cdn-cgi/l/email-protection.html#2b694744594f4c59445e5b6b445e5f4744444005484446"
+                  ><span
+                    class="__cf_email__"
+                    data-cfemail="bdffd1d2cfd9dacfd2c8cdfdd2c8c9d1d2d2d693ded2d0"
+                    >[email&#160;protected]</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="font-bold">Follow us</h2>
+            <ul class="text-sm space-y-3 text-light">
+              <li class="space-x-3">
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/twitter.svg"
+                    alt=""
+                    class="scale-75"
+                  /><span>Twitter</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/facebook.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>Facebook</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/instagram.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>Instagram</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/linkedin.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>LinkedIn</span></a
+                >
+              </li>
+              <li>
+                <a href="#" class="flex items-center space-x-2"
+                  ><img
+                    src="assets/frontend/assets/svgs/socials/whatsapp.svg"
+                    alt=""
+                    class="scale-75"
+                  />
+                  <span>Whatsapp</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section
+          class="py-5 flex flex-col justify-center space-y-3 sm:space-y-0 items-center sm:flex-row sm:justify-between text-xs border-t border-gray-500"
+        >
+          <div class="text-gray-400">© 2023 PAYSUSOFI All rights reserved.</div>
+          <ul class="flex items-center space-x-5">
+            <li>
+              <a href="#">Privacy policy</a>
+            </li>
+            <li>
+              <a href="#">Terms of use</a>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </footer>
+
+    <script
+      data-cfasync="false"
+      src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script defer src="../unpkg.com/alpinejs%403.9.0/dist/cdn.min.js"></script>
+  </body>
+
+  <!-- Mirrored from PAYSUSOFI.co/faq by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 01:46:51 GMT -->
+</html>
